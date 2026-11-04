@@ -5,6 +5,7 @@ data/raw_corrected/
 data/binance/
 data/external/*.parquet
 data/external/*/*.parquet
+data/paper/
 
 # Keep concise reports/results; omit generated trade-level CSVs by default.
 data/analysis/*/backtest_trades.csv
