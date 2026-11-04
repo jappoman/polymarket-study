@@ -1,0 +1,14 @@
+{
+  "train_rows": 22738,
+  "test_rows": 9746,
+  "trades": 1193,
+  "test_win_rate": 0.5,
+  "brier_score": 0.19245022743124165,
+  "starting_bankroll": 100.0,
+  "ending_bankroll": 21.02887449577148,
+  "total_pnl": -78.97112550422852,
+  "edge_threshold": 0.03,
+  "spread_haircut": 0.01,
+  "fixed_stake": 1.0,
+  "kelly_fraction": 0.25
+}

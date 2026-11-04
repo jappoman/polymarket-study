@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "input": [
+      "data/analysis/2026-10-25_11-03/observations_btc.csv"
+    ],
+    "threshold": 0.0001,
+    "max_price": 0.7,
+    "haircut": 0.04,
+    "fee": 0.01,
+    "output": "data/analysis/2026-10-25_11-03/external_strategy.json"
+  },
+  "periods": {
+    "2026-10-25_11-03": {
+      "markets": 2557,
+      "trades": 885,
+      "win_rate": 0.5898305084745763,
+      "pnl_fixed_stake": 36.66261883657581,
+      "roi_per_trade": 0.04142668795093312
+    }
+  }
+}

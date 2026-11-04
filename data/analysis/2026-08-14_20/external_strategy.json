@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "input": [
+      "data/analysis/2026-08-14_20/observations_btc.csv"
+    ],
+    "threshold": 0.0001,
+    "max_price": 0.7,
+    "haircut": 0.04,
+    "fee": 0.01,
+    "output": "data/analysis/2026-08-14_20/external_strategy.json"
+  },
+  "periods": {
+    "2026-08-14_20": {
+      "markets": 1706,
+      "trades": 297,
+      "win_rate": 0.5420875420875421,
+      "pnl_fixed_stake": -22.794049630374985,
+      "roi_per_trade": -0.07674764185311443
+    }
+  }
+}
