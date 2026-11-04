@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "input": [
+      "data/analysis/2026-09-20_26/observations_btc.csv",
+      "data/analysis/2026-09-27_10-03/observations_btc.csv",
+      "data/analysis/2026-10-04_10-10/observations_btc.csv",
+      "data/analysis/2026-10-11_17/observations_btc.csv",
+      "data/analysis/2026-10-18_24/observations_btc.csv",
+      "data/analysis/2026-10-25_11-03/observations_btc.csv"
+    ],
+    "threshold": 0.0001,
+    "max_price": 0.7,
+    "haircut": 0.04,
+    "fee": 0.01,
+    "output": "data/analysis/external_strategy_stress_6periods.json"
+  },
+  "periods": {
+    "2026-09-20_26": {
+      "markets": 2041,
+      "trades": 553,
+      "win_rate": 0.5533453887884268,
+      "pnl_fixed_stake": -28.046043091213885,
+      "roi_per_trade": -0.050716171955178815
+    },
+    "2026-09-27_10-03": {
+      "markets": 2016,
+      "trades": 482,
+      "win_rate": 0.5809128630705395,
+      "pnl_fixed_stake": 8.791178647820445,
+      "roi_per_trade": 0.018238959850249887
+    },
+    "2026-10-04_10-10": {
+      "markets": 1706,
+      "trades": 435,
+      "win_rate": 0.632183908045977,
+      "pnl_fixed_stake": 41.084184534763736,
+      "roi_per_trade": 0.09444640122934192
+    },
+    "2026-10-11_17": {
+      "markets": 1706,
+      "trades": 563,
+      "win_rate": 0.6003552397868561,
+      "pnl_fixed_stake": 41.96372354886273,
+      "roi_per_trade": 0.07453592104593736
+    },
+    "2026-10-18_24": {
+      "markets": 1705,
+      "trades": 639,
+      "win_rate": 0.6353677621283255,
+      "pnl_fixed_stake": 94.46176310897145,
+      "roi_per_trade": 0.1478274853035547
+    },
+    "2026-10-25_11-03": {
+      "markets": 2557,
+      "trades": 885,
+      "win_rate": 0.5898305084745763,
+      "pnl_fixed_stake": 36.66261883657581,
+      "roi_per_trade": 0.04142668795093312
+    }
+  }
+}

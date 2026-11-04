@@ -1,0 +1,15 @@
+# Raw market histories and downloaded market-data archives are reproducible
+# but too large for the source repository.
+data/raw/
+data/raw_corrected/
+data/binance/
+data/external/*.parquet
+data/external/*/*.parquet
+
+# Keep concise reports/results; omit generated trade-level CSVs by default.
+data/analysis/*/backtest_trades.csv
+data/analysis/*/observations.csv
+data/analysis/*/observations_btc.csv
+data/analysis/*/summary_by_price.csv
+__pycache__/
+polymarket_study/__pycache__/

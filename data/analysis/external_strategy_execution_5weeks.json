@@ -1,0 +1,42 @@
+{
+  "2026-09-20_26": {
+    "candidate_markets": 2041,
+    "trades": 9,
+    "win_rate": 0.3333333333333333,
+    "pnl_fixed_stake": -3.756229430418386,
+    "roi_per_trade": -0.4173588256020429,
+    "mean_execution_price": 0.5138888888888888
+  },
+  "2026-09-27_10-03": {
+    "candidate_markets": 2016,
+    "trades": 29,
+    "win_rate": 0.6896551724137931,
+    "pnl_fixed_stake": 7.7619533564902525,
+    "roi_per_trade": 0.26765356401690527,
+    "mean_execution_price": 0.5558620689655173
+  },
+  "2026-10-04_10-10": {
+    "candidate_markets": 1706,
+    "trades": 36,
+    "win_rate": 0.7222222222222222,
+    "pnl_fixed_stake": 8.46940228544637,
+    "roi_per_trade": 0.23526117459573248,
+    "mean_execution_price": 0.5794444444444444
+  },
+  "2026-10-11_17": {
+    "candidate_markets": 1706,
+    "trades": 65,
+    "win_rate": 0.5692307692307692,
+    "pnl_fixed_stake": 0.6263347158894081,
+    "roi_per_trade": 0.009635918705990894,
+    "mean_execution_price": 0.5528461538461539
+  },
+  "2026-10-18_24": {
+    "candidate_markets": 1705,
+    "trades": 78,
+    "win_rate": 0.6025641025641025,
+    "pnl_fixed_stake": 4.778677146340169,
+    "roi_per_trade": 0.06126509161974576,
+    "mean_execution_price": 0.5654487179487179
+  }
+}
