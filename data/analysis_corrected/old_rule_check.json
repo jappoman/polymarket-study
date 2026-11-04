@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "input": [
+      "data/analysis_corrected/2026-08-14_20/observations_btc.csv",
+      "data/analysis_corrected/2026-09-20_26/observations_btc.csv",
+      "data/analysis_corrected/2026-09-27_10-03/observations_btc.csv",
+      "data/analysis_corrected/2026-10-04_10-10/observations_btc.csv",
+      "data/analysis_corrected/2026-10-11_17/observations_btc.csv",
+      "data/analysis_corrected/2026-10-18_24/observations_btc.csv",
+      "data/analysis_corrected/2026-10-25_11-03/observations_btc.csv"
+    ],
+    "threshold": 0.0002,
+    "max_price": 0.55,
+    "haircut": 0.04,
+    "fee": 0.01,
+    "output": "data/analysis_corrected/old_rule_check.json"
+  },
+  "periods": {
+    "2026-08-14_20": {
+      "markets": 1707,
+      "trades": 596,
+      "win_rate": 0.4714765100671141,
+      "pnl_fixed_stake": -80.5090458170023,
+      "roi_per_trade": -0.1350822916392656
+    },
+    "2026-09-20_26": {
+      "markets": 2041,
+      "trades": 979,
+      "win_rate": 0.4882533197139939,
+      "pnl_fixed_stake": -100.0868443738274,
+      "roi_per_trade": -0.10223375319083494
+    },
+    "2026-09-27_10-03": {
+      "markets": 2016,
+      "trades": 874,
+      "win_rate": 0.4759725400457666,
+      "pnl_fixed_stake": -108.5663886229916,
+      "roi_per_trade": -0.12421783595307963
+    },
+    "2026-10-04_10-10": {
+      "markets": 1707,
+      "trades": 781,
+      "win_rate": 0.47759282970550576,
+      "pnl_fixed_stake": -97.76567540553923,
+      "roi_per_trade": -0.12518012215818083
+    },
+    "2026-10-11_17": {
+      "markets": 1707,
+      "trades": 927,
+      "win_rate": 0.48220064724919093,
+      "pnl_fixed_stake": -107.62421352043687,
+      "roi_per_trade": -0.11609947521082725
+    },
+    "2026-10-18_24": {
+      "markets": 1706,
+      "trades": 954,
+      "win_rate": 0.4916142557651992,
+      "pnl_fixed_stake": -93.48871618165788,
+      "roi_per_trade": -0.09799655784240868
+    },
+    "2026-10-25_11-03": {
+      "markets": 2558,
+      "trades": 1373,
+      "win_rate": 0.493809176984705,
+      "pnl_fixed_stake": -129.72662553924044,
+      "roi_per_trade": -0.09448406812763324
+    }
+  }
+}

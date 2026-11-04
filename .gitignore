@@ -11,5 +11,9 @@ data/analysis/*/backtest_trades.csv
 data/analysis/*/observations.csv
 data/analysis/*/observations_btc.csv
 data/analysis/*/summary_by_price.csv
+data/analysis_corrected/*/backtest_trades.csv
+data/analysis_corrected/*/observations.csv
+data/analysis_corrected/*/observations_btc.csv
+data/analysis_corrected/*/summary_by_price.csv
 __pycache__/
 polymarket_study/__pycache__/

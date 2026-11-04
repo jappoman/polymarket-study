@@ -44,10 +44,15 @@ def evaluate(snapshots, candles, seconds, signal, regime, threshold, cap, fee):
             continue
         # The slug suffix is the closing boundary, not the opening boundary.
         start = int(slug.rsplit("-", 1)[1]) - 300
-        c0, cx = candles.get(start - 60), candles.get(start)
-        if not c0 or not cx:
+        c0 = candles.get(start - 60)
+        # Match augment.py: use only a candle whose close is strictly before
+        # the observation timestamp, avoiding a boundary-time look-ahead.
+        close_open = ((start + seconds - 1) // 60) * 60 - 60
+        cx = candles.get(close_open)
+        prev_candle = candles.get(close_open - 60)
+        if not c0 or not cx or not prev_candle:
             continue
-        prev = cx["close"] / c0["close"] - 1.0
+        prev = cx["close"] / prev_candle["close"] - 1.0
         move = cx["close"] / c0["open"] - 1.0
         same = prev * move >= 0
         if regime == "same" and not same or regime == "opposite" and same:

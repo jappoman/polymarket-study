@@ -1,0 +1,2141 @@
+{
+  "parameters": {
+    "input": [
+      "data/analysis_corrected/2026-08-14_20/observations_btc.csv",
+      "data/analysis_corrected/2026-09-20_26/observations_btc.csv",
+      "data/analysis_corrected/2026-09-27_10-03/observations_btc.csv",
+      "data/analysis_corrected/2026-10-04_10-10/observations_btc.csv",
+      "data/analysis_corrected/2026-10-11_17/observations_btc.csv",
+      "data/analysis_corrected/2026-10-18_24/observations_btc.csv",
+      "data/analysis_corrected/2026-10-25_11-03/observations_btc.csv"
+    ],
+    "development_count": 4,
+    "haircut": 0.01,
+    "fee": 0.01,
+    "min_trades": 20,
+    "output": "data/analysis_corrected/signal_grid_walkforward_cost01.json"
+  },
+  "chosen": {
+    "seconds": 60,
+    "signal": "weighted",
+    "regime": "opposite",
+    "prev_threshold": 0.0001,
+    "round_threshold": 0.0001,
+    "max_price": 0.55,
+    "development": [
+      {
+        "trades": 102,
+        "wins": 55,
+        "win_rate": 0.5392156862745098,
+        "pnl": 4.857212131754087,
+        "roi": 0.047619726781902814
+      },
+      {
+        "trades": 176,
+        "wins": 100,
+        "win_rate": 0.5681818181818182,
+        "pnl": 18.27660185569447,
+        "roi": 0.10384432872553676
+      },
+      {
+        "trades": 159,
+        "wins": 85,
+        "win_rate": 0.5345911949685535,
+        "pnl": 6.7205493262369265,
+        "roi": 0.04226760582538947
+      },
+      {
+        "trades": 144,
+        "wins": 80,
+        "win_rate": 0.5555555555555556,
+        "pnl": 11.418409998624071,
+        "roi": 0.07929451387933383
+      }
+    ],
+    "development_pnl": 41.27277331230955,
+    "development_min_pnl": 4.857212131754087,
+    "development_roi": 0.07103747558056722
+  },
+  "evaluation": [
+    {
+      "period": "2026-10-11_17",
+      "trades": 143,
+      "wins": 80,
+      "win_rate": 0.5594405594405595,
+      "pnl": 12.217121022781884,
+      "roi": 0.08543441274672646
+    },
+    {
+      "period": "2026-10-18_24",
+      "trades": 160,
+      "wins": 79,
+      "win_rate": 0.49375,
+      "pnl": -6.65183657977831,
+      "roi": -0.041573978623614435
+    },
+    {
+      "period": "2026-10-25_11-03",
+      "trades": 250,
+      "wins": 116,
+      "win_rate": 0.464,
+      "pnl": -25.179492637197153,
+      "roi": -0.10071797054878862
+    }
+  ],
+  "evaluation_total": {
+    "trades": 553,
+    "pnl": -19.61420819419358
+  },
+  "top_candidates": [
+    {
+      "seconds": 60,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 0.0001,
+      "max_price": 0.55,
+      "development": [
+        {
+          "trades": 102,
+          "wins": 55,
+          "win_rate": 0.5392156862745098,
+          "pnl": 4.857212131754087,
+          "roi": 0.047619726781902814
+        },
+        {
+          "trades": 176,
+          "wins": 100,
+          "win_rate": 0.5681818181818182,
+          "pnl": 18.27660185569447,
+          "roi": 0.10384432872553676
+        },
+        {
+          "trades": 159,
+          "wins": 85,
+          "win_rate": 0.5345911949685535,
+          "pnl": 6.7205493262369265,
+          "roi": 0.04226760582538947
+        },
+        {
+          "trades": 144,
+          "wins": 80,
+          "win_rate": 0.5555555555555556,
+          "pnl": 11.418409998624071,
+          "roi": 0.07929451387933383
+        }
+      ],
+      "development_pnl": 41.27277331230955,
+      "development_min_pnl": 4.857212131754087,
+      "development_roi": 0.07103747558056722
+    },
+    {
+      "seconds": 30,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 0.0001,
+      "max_price": 0.55,
+      "development": [
+        {
+          "trades": 102,
+          "wins": 55,
+          "win_rate": 0.5392156862745098,
+          "pnl": 4.857212131754087,
+          "roi": 0.047619726781902814
+        },
+        {
+          "trades": 176,
+          "wins": 100,
+          "win_rate": 0.5681818181818182,
+          "pnl": 18.27660185569447,
+          "roi": 0.10384432872553676
+        },
+        {
+          "trades": 159,
+          "wins": 85,
+          "win_rate": 0.5345911949685535,
+          "pnl": 6.54434395855468,
+          "roi": 0.0411593959657527
+        },
+        {
+          "trades": 144,
+          "wins": 80,
+          "win_rate": 0.5555555555555556,
+          "pnl": 11.379959551637626,
+          "roi": 0.0790274968863724
+        }
+      ],
+      "development_pnl": 41.058117497640865,
+      "development_min_pnl": 4.857212131754087,
+      "development_roi": 0.07066801634705829
+    },
+    {
+      "seconds": 60,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 0.0001,
+      "max_price": 0.6,
+      "development": [
+        {
+          "trades": 102,
+          "wins": 55,
+          "win_rate": 0.5392156862745098,
+          "pnl": 4.857212131754087,
+          "roi": 0.047619726781902814
+        },
+        {
+          "trades": 176,
+          "wins": 100,
+          "win_rate": 0.5681818181818182,
+          "pnl": 18.27660185569447,
+          "roi": 0.10384432872553676
+        },
+        {
+          "trades": 159,
+          "wins": 85,
+          "win_rate": 0.5345911949685535,
+          "pnl": 6.7205493262369265,
+          "roi": 0.04226760582538947
+        },
+        {
+          "trades": 145,
+          "wins": 80,
+          "win_rate": 0.5517241379310345,
+          "pnl": 10.408409998624071,
+          "roi": 0.07178213792154532
+        }
+      ],
+      "development_pnl": 40.262773312309555,
+      "development_min_pnl": 4.857212131754087,
+      "development_roi": 0.06918002287338411
+    },
+    {
+      "seconds": 60,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 0.0001,
+      "max_price": 0.65,
+      "development": [
+        {
+          "trades": 102,
+          "wins": 55,
+          "win_rate": 0.5392156862745098,
+          "pnl": 4.857212131754087,
+          "roi": 0.047619726781902814
+        },
+        {
+          "trades": 176,
+          "wins": 100,
+          "win_rate": 0.5681818181818182,
+          "pnl": 18.27660185569447,
+          "roi": 0.10384432872553676
+        },
+        {
+          "trades": 159,
+          "wins": 85,
+          "win_rate": 0.5345911949685535,
+          "pnl": 6.7205493262369265,
+          "roi": 0.04226760582538947
+        },
+        {
+          "trades": 145,
+          "wins": 80,
+          "win_rate": 0.5517241379310345,
+          "pnl": 10.408409998624071,
+          "roi": 0.07178213792154532
+        }
+      ],
+      "development_pnl": 40.262773312309555,
+      "development_min_pnl": 4.857212131754087,
+      "development_roi": 0.06918002287338411
+    },
+    {
+      "seconds": 60,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 0.0001,
+      "max_price": 0.7,
+      "development": [
+        {
+          "trades": 102,
+          "wins": 55,
+          "win_rate": 0.5392156862745098,
+          "pnl": 4.857212131754087,
+          "roi": 0.047619726781902814
+        },
+        {
+          "trades": 176,
+          "wins": 100,
+          "win_rate": 0.5681818181818182,
+          "pnl": 18.27660185569447,
+          "roi": 0.10384432872553676
+        },
+        {
+          "trades": 159,
+          "wins": 85,
+          "win_rate": 0.5345911949685535,
+          "pnl": 6.7205493262369265,
+          "roi": 0.04226760582538947
+        },
+        {
+          "trades": 145,
+          "wins": 80,
+          "win_rate": 0.5517241379310345,
+          "pnl": 10.408409998624071,
+          "roi": 0.07178213792154532
+        }
+      ],
+      "development_pnl": 40.262773312309555,
+      "development_min_pnl": 4.857212131754087,
+      "development_roi": 0.06918002287338411
+    },
+    {
+      "seconds": 30,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 0.0001,
+      "max_price": 0.6,
+      "development": [
+        {
+          "trades": 102,
+          "wins": 55,
+          "win_rate": 0.5392156862745098,
+          "pnl": 4.857212131754087,
+          "roi": 0.047619726781902814
+        },
+        {
+          "trades": 176,
+          "wins": 100,
+          "win_rate": 0.5681818181818182,
+          "pnl": 18.27660185569447,
+          "roi": 0.10384432872553676
+        },
+        {
+          "trades": 159,
+          "wins": 85,
+          "win_rate": 0.5345911949685535,
+          "pnl": 6.54434395855468,
+          "roi": 0.0411593959657527
+        },
+        {
+          "trades": 145,
+          "wins": 80,
+          "win_rate": 0.5517241379310345,
+          "pnl": 10.369959551637626,
+          "roi": 0.07151696242508708
+        }
+      ],
+      "development_pnl": 40.04811749764086,
+      "development_min_pnl": 4.857212131754087,
+      "development_roi": 0.06881119844955474
+    },
+    {
+      "seconds": 30,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 0.0001,
+      "max_price": 0.65,
+      "development": [
+        {
+          "trades": 102,
+          "wins": 55,
+          "win_rate": 0.5392156862745098,
+          "pnl": 4.857212131754087,
+          "roi": 0.047619726781902814
+        },
+        {
+          "trades": 176,
+          "wins": 100,
+          "win_rate": 0.5681818181818182,
+          "pnl": 18.27660185569447,
+          "roi": 0.10384432872553676
+        },
+        {
+          "trades": 159,
+          "wins": 85,
+          "win_rate": 0.5345911949685535,
+          "pnl": 6.54434395855468,
+          "roi": 0.0411593959657527
+        },
+        {
+          "trades": 145,
+          "wins": 80,
+          "win_rate": 0.5517241379310345,
+          "pnl": 10.369959551637626,
+          "roi": 0.07151696242508708
+        }
+      ],
+      "development_pnl": 40.04811749764086,
+      "development_min_pnl": 4.857212131754087,
+      "development_roi": 0.06881119844955474
+    },
+    {
+      "seconds": 30,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 0.0001,
+      "max_price": 0.7,
+      "development": [
+        {
+          "trades": 102,
+          "wins": 55,
+          "win_rate": 0.5392156862745098,
+          "pnl": 4.857212131754087,
+          "roi": 0.047619726781902814
+        },
+        {
+          "trades": 176,
+          "wins": 100,
+          "win_rate": 0.5681818181818182,
+          "pnl": 18.27660185569447,
+          "roi": 0.10384432872553676
+        },
+        {
+          "trades": 159,
+          "wins": 85,
+          "win_rate": 0.5345911949685535,
+          "pnl": 6.54434395855468,
+          "roi": 0.0411593959657527
+        },
+        {
+          "trades": 145,
+          "wins": 80,
+          "win_rate": 0.5517241379310345,
+          "pnl": 10.369959551637626,
+          "roi": 0.07151696242508708
+        }
+      ],
+      "development_pnl": 40.04811749764086,
+      "development_min_pnl": 4.857212131754087,
+      "development_roi": 0.06881119844955474
+    },
+    {
+      "seconds": 30,
+      "signal": "prev",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 5e-05,
+      "max_price": 0.55,
+      "development": [
+        {
+          "trades": 119,
+          "wins": 63,
+          "win_rate": 0.5294117647058824,
+          "pnl": 3.4687678185294217,
+          "roi": 0.029149309399406905
+        },
+        {
+          "trades": 206,
+          "wins": 108,
+          "win_rate": 0.5242718446601942,
+          "pnl": 2.992107557081579,
+          "roi": 0.014524793966415431
+        },
+        {
+          "trades": 195,
+          "wins": 105,
+          "win_rate": 0.5384615384615384,
+          "pnl": 8.938750338156922,
+          "roi": 0.04583974532388165
+        },
+        {
+          "trades": 167,
+          "wins": 92,
+          "win_rate": 0.5508982035928144,
+          "pnl": 11.624512010617652,
+          "roi": 0.0696078563510039
+        }
+      ],
+      "development_pnl": 27.024137724385575,
+      "development_min_pnl": 2.992107557081579,
+      "development_roi": 0.03933644501366168
+    },
+    {
+      "seconds": 30,
+      "signal": "prev",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 5e-05,
+      "max_price": 0.6,
+      "development": [
+        {
+          "trades": 119,
+          "wins": 63,
+          "win_rate": 0.5294117647058824,
+          "pnl": 3.4687678185294217,
+          "roi": 0.029149309399406905
+        },
+        {
+          "trades": 206,
+          "wins": 108,
+          "win_rate": 0.5242718446601942,
+          "pnl": 2.992107557081579,
+          "roi": 0.014524793966415431
+        },
+        {
+          "trades": 195,
+          "wins": 105,
+          "win_rate": 0.5384615384615384,
+          "pnl": 8.938750338156922,
+          "roi": 0.04583974532388165
+        },
+        {
+          "trades": 168,
+          "wins": 92,
+          "win_rate": 0.5476190476190477,
+          "pnl": 10.614512010617652,
+          "roi": 0.06318161911081936
+        }
+      ],
+      "development_pnl": 26.014137724385574,
+      "development_min_pnl": 2.992107557081579,
+      "development_roi": 0.03781124669242089
+    },
+    {
+      "seconds": 30,
+      "signal": "prev",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 5e-05,
+      "max_price": 0.65,
+      "development": [
+        {
+          "trades": 119,
+          "wins": 63,
+          "win_rate": 0.5294117647058824,
+          "pnl": 3.4687678185294217,
+          "roi": 0.029149309399406905
+        },
+        {
+          "trades": 206,
+          "wins": 108,
+          "win_rate": 0.5242718446601942,
+          "pnl": 2.992107557081579,
+          "roi": 0.014524793966415431
+        },
+        {
+          "trades": 195,
+          "wins": 105,
+          "win_rate": 0.5384615384615384,
+          "pnl": 8.938750338156922,
+          "roi": 0.04583974532388165
+        },
+        {
+          "trades": 168,
+          "wins": 92,
+          "win_rate": 0.5476190476190477,
+          "pnl": 10.614512010617652,
+          "roi": 0.06318161911081936
+        }
+      ],
+      "development_pnl": 26.014137724385574,
+      "development_min_pnl": 2.992107557081579,
+      "development_roi": 0.03781124669242089
+    },
+    {
+      "seconds": 30,
+      "signal": "prev",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 5e-05,
+      "max_price": 0.7,
+      "development": [
+        {
+          "trades": 119,
+          "wins": 63,
+          "win_rate": 0.5294117647058824,
+          "pnl": 3.4687678185294217,
+          "roi": 0.029149309399406905
+        },
+        {
+          "trades": 206,
+          "wins": 108,
+          "win_rate": 0.5242718446601942,
+          "pnl": 2.992107557081579,
+          "roi": 0.014524793966415431
+        },
+        {
+          "trades": 195,
+          "wins": 105,
+          "win_rate": 0.5384615384615384,
+          "pnl": 8.938750338156922,
+          "roi": 0.04583974532388165
+        },
+        {
+          "trades": 168,
+          "wins": 92,
+          "win_rate": 0.5476190476190477,
+          "pnl": 10.614512010617652,
+          "roi": 0.06318161911081936
+        }
+      ],
+      "development_pnl": 26.014137724385574,
+      "development_min_pnl": 2.992107557081579,
+      "development_roi": 0.03781124669242089
+    },
+    {
+      "seconds": 60,
+      "signal": "prev",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 5e-05,
+      "max_price": 0.55,
+      "development": [
+        {
+          "trades": 119,
+          "wins": 63,
+          "win_rate": 0.5294117647058824,
+          "pnl": 3.4687678185294217,
+          "roi": 0.029149309399406905
+        },
+        {
+          "trades": 206,
+          "wins": 108,
+          "win_rate": 0.5242718446601942,
+          "pnl": 2.9195188627707176,
+          "roi": 0.014172421663935522
+        },
+        {
+          "trades": 194,
+          "wins": 105,
+          "win_rate": 0.5412371134020618,
+          "pnl": 9.916165644246101,
+          "roi": 0.05111425589817578
+        },
+        {
+          "trades": 167,
+          "wins": 92,
+          "win_rate": 0.5508982035928144,
+          "pnl": 11.643925716694142,
+          "roi": 0.06972410608798887
+        }
+      ],
+      "development_pnl": 27.948378042240382,
+      "development_min_pnl": 2.9195188627707176,
+      "development_roi": 0.04074107586332417
+    },
+    {
+      "seconds": 60,
+      "signal": "prev",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 5e-05,
+      "max_price": 0.6,
+      "development": [
+        {
+          "trades": 119,
+          "wins": 63,
+          "win_rate": 0.5294117647058824,
+          "pnl": 3.4687678185294217,
+          "roi": 0.029149309399406905
+        },
+        {
+          "trades": 206,
+          "wins": 108,
+          "win_rate": 0.5242718446601942,
+          "pnl": 2.9195188627707176,
+          "roi": 0.014172421663935522
+        },
+        {
+          "trades": 195,
+          "wins": 105,
+          "win_rate": 0.5384615384615384,
+          "pnl": 8.906165644246101,
+          "roi": 0.04567264432946719
+        },
+        {
+          "trades": 168,
+          "wins": 92,
+          "win_rate": 0.5476190476190477,
+          "pnl": 10.633925716694142,
+          "roi": 0.06329717688508418
+        }
+      ],
+      "development_pnl": 25.928378042240382,
+      "development_min_pnl": 2.9195188627707176,
+      "development_roi": 0.03768659599162846
+    },
+    {
+      "seconds": 60,
+      "signal": "prev",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 5e-05,
+      "max_price": 0.65,
+      "development": [
+        {
+          "trades": 119,
+          "wins": 63,
+          "win_rate": 0.5294117647058824,
+          "pnl": 3.4687678185294217,
+          "roi": 0.029149309399406905
+        },
+        {
+          "trades": 206,
+          "wins": 108,
+          "win_rate": 0.5242718446601942,
+          "pnl": 2.9195188627707176,
+          "roi": 0.014172421663935522
+        },
+        {
+          "trades": 195,
+          "wins": 105,
+          "win_rate": 0.5384615384615384,
+          "pnl": 8.906165644246101,
+          "roi": 0.04567264432946719
+        },
+        {
+          "trades": 168,
+          "wins": 92,
+          "win_rate": 0.5476190476190477,
+          "pnl": 10.633925716694142,
+          "roi": 0.06329717688508418
+        }
+      ],
+      "development_pnl": 25.928378042240382,
+      "development_min_pnl": 2.9195188627707176,
+      "development_roi": 0.03768659599162846
+    },
+    {
+      "seconds": 60,
+      "signal": "prev",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 5e-05,
+      "max_price": 0.7,
+      "development": [
+        {
+          "trades": 119,
+          "wins": 63,
+          "win_rate": 0.5294117647058824,
+          "pnl": 3.4687678185294217,
+          "roi": 0.029149309399406905
+        },
+        {
+          "trades": 206,
+          "wins": 108,
+          "win_rate": 0.5242718446601942,
+          "pnl": 2.9195188627707176,
+          "roi": 0.014172421663935522
+        },
+        {
+          "trades": 195,
+          "wins": 105,
+          "win_rate": 0.5384615384615384,
+          "pnl": 8.906165644246101,
+          "roi": 0.04567264432946719
+        },
+        {
+          "trades": 168,
+          "wins": 92,
+          "win_rate": 0.5476190476190477,
+          "pnl": 10.633925716694142,
+          "roi": 0.06329717688508418
+        }
+      ],
+      "development_pnl": 25.928378042240382,
+      "development_min_pnl": 2.9195188627707176,
+      "development_roi": 0.03768659599162846
+    },
+    {
+      "seconds": 180,
+      "signal": "prev",
+      "regime": "all",
+      "prev_threshold": 0.0003,
+      "round_threshold": 5e-05,
+      "max_price": 0.5,
+      "development": [
+        {
+          "trades": 30,
+          "wins": 18,
+          "win_rate": 0.6,
+          "pnl": 8.154849071610425,
+          "roi": 0.27182830238701416
+        },
+        {
+          "trades": 89,
+          "wins": 45,
+          "win_rate": 0.5056179775280899,
+          "pnl": 3.05592177781573,
+          "roi": 0.03433619975073854
+        },
+        {
+          "trades": 68,
+          "wins": 34,
+          "win_rate": 0.5,
+          "pnl": 1.4452225417413906,
+          "roi": 0.02125327267266751
+        },
+        {
+          "trades": 39,
+          "wins": 25,
+          "win_rate": 0.6410256410256411,
+          "pnl": 11.766580588795144,
+          "roi": 0.30170719458449086
+        }
+      ],
+      "development_pnl": 24.42257397996269,
+      "development_min_pnl": 1.4452225417413906,
+      "development_roi": 0.10806448663700305
+    },
+    {
+      "seconds": 180,
+      "signal": "prev",
+      "regime": "all",
+      "prev_threshold": 0.0003,
+      "round_threshold": 0.0001,
+      "max_price": 0.5,
+      "development": [
+        {
+          "trades": 30,
+          "wins": 18,
+          "win_rate": 0.6,
+          "pnl": 8.154849071610425,
+          "roi": 0.27182830238701416
+        },
+        {
+          "trades": 87,
+          "wins": 44,
+          "win_rate": 0.5057471264367817,
+          "pnl": 3.0140661077126376,
+          "roi": 0.03464443801968549
+        },
+        {
+          "trades": 66,
+          "wins": 33,
+          "win_rate": 0.5,
+          "pnl": 1.4450205215393706,
+          "roi": 0.0218942503263541
+        },
+        {
+          "trades": 39,
+          "wins": 25,
+          "win_rate": 0.6410256410256411,
+          "pnl": 11.766580588795144,
+          "roi": 0.30170719458449086
+        }
+      ],
+      "development_pnl": 24.380516289657578,
+      "development_min_pnl": 1.4450205215393706,
+      "development_roi": 0.109822145448908
+    },
+    {
+      "seconds": 180,
+      "signal": "sum",
+      "regime": "opposite",
+      "prev_threshold": 0.0003,
+      "round_threshold": 0,
+      "max_price": 0.6,
+      "development": [
+        {
+          "trades": 98,
+          "wins": 54,
+          "win_rate": 0.5510204081632653,
+          "pnl": 6.806234656752772,
+          "roi": 0.06945137404849767
+        },
+        {
+          "trades": 202,
+          "wins": 111,
+          "win_rate": 0.5495049504950495,
+          "pnl": 12.848744960735594,
+          "roi": 0.06360764832047323
+        },
+        {
+          "trades": 150,
+          "wins": 78,
+          "win_rate": 0.52,
+          "pnl": 1.4234002249437023,
+          "roi": 0.009489334832958015
+        },
+        {
+          "trades": 128,
+          "wins": 70,
+          "win_rate": 0.546875,
+          "pnl": 7.7013747649993425,
+          "roi": 0.06016699035155736
+        }
+      ],
+      "development_pnl": 28.77975460743141,
+      "development_min_pnl": 1.4234002249437023,
+      "development_roi": 0.04979196298863566
+    },
+    {
+      "seconds": 180,
+      "signal": "sum",
+      "regime": "opposite",
+      "prev_threshold": 0.0003,
+      "round_threshold": 0,
+      "max_price": 0.65,
+      "development": [
+        {
+          "trades": 98,
+          "wins": 54,
+          "win_rate": 0.5510204081632653,
+          "pnl": 6.806234656752772,
+          "roi": 0.06945137404849767
+        },
+        {
+          "trades": 202,
+          "wins": 111,
+          "win_rate": 0.5495049504950495,
+          "pnl": 12.848744960735594,
+          "roi": 0.06360764832047323
+        },
+        {
+          "trades": 150,
+          "wins": 78,
+          "win_rate": 0.52,
+          "pnl": 1.4234002249437023,
+          "roi": 0.009489334832958015
+        },
+        {
+          "trades": 128,
+          "wins": 70,
+          "win_rate": 0.546875,
+          "pnl": 7.7013747649993425,
+          "roi": 0.06016699035155736
+        }
+      ],
+      "development_pnl": 28.77975460743141,
+      "development_min_pnl": 1.4234002249437023,
+      "development_roi": 0.04979196298863566
+    },
+    {
+      "seconds": 180,
+      "signal": "sum",
+      "regime": "opposite",
+      "prev_threshold": 0.0003,
+      "round_threshold": 0,
+      "max_price": 0.7,
+      "development": [
+        {
+          "trades": 98,
+          "wins": 54,
+          "win_rate": 0.5510204081632653,
+          "pnl": 6.806234656752772,
+          "roi": 0.06945137404849767
+        },
+        {
+          "trades": 202,
+          "wins": 111,
+          "win_rate": 0.5495049504950495,
+          "pnl": 12.848744960735594,
+          "roi": 0.06360764832047323
+        },
+        {
+          "trades": 150,
+          "wins": 78,
+          "win_rate": 0.52,
+          "pnl": 1.4234002249437023,
+          "roi": 0.009489334832958015
+        },
+        {
+          "trades": 128,
+          "wins": 70,
+          "win_rate": 0.546875,
+          "pnl": 7.7013747649993425,
+          "roi": 0.06016699035155736
+        }
+      ],
+      "development_pnl": 28.77975460743141,
+      "development_min_pnl": 1.4234002249437023,
+      "development_roi": 0.04979196298863566
+    },
+    {
+      "seconds": 180,
+      "signal": "sum",
+      "regime": "opposite",
+      "prev_threshold": 0.0003,
+      "round_threshold": 0,
+      "max_price": 0.55,
+      "development": [
+        {
+          "trades": 98,
+          "wins": 54,
+          "win_rate": 0.5510204081632653,
+          "pnl": 6.806234656752772,
+          "roi": 0.06945137404849767
+        },
+        {
+          "trades": 198,
+          "wins": 108,
+          "win_rate": 0.5454545454545454,
+          "pnl": 11.515229852707213,
+          "roi": 0.05815772652882431
+        },
+        {
+          "trades": 149,
+          "wins": 77,
+          "win_rate": 0.5167785234899329,
+          "pnl": 0.6634887205189236,
+          "roi": 0.00445294443301291
+        },
+        {
+          "trades": 128,
+          "wins": 70,
+          "win_rate": 0.546875,
+          "pnl": 7.7013747649993425,
+          "roi": 0.06016699035155736
+        }
+      ],
+      "development_pnl": 26.68632799497825,
+      "development_min_pnl": 0.6634887205189236,
+      "development_roi": 0.04657299824603534
+    },
+    {
+      "seconds": 240,
+      "signal": "sum",
+      "regime": "opposite",
+      "prev_threshold": 0.0002,
+      "round_threshold": 0,
+      "max_price": 0.5,
+      "development": [
+        {
+          "trades": 28,
+          "wins": 14,
+          "win_rate": 0.5,
+          "pnl": 0.6064705108600914,
+          "roi": 0.02165966110214612
+        },
+        {
+          "trades": 49,
+          "wins": 25,
+          "win_rate": 0.5102040816326531,
+          "pnl": 1.7892390169508525,
+          "roi": 0.036515081978588826
+        },
+        {
+          "trades": 46,
+          "wins": 25,
+          "win_rate": 0.5434782608695652,
+          "pnl": 5.04595496183558,
+          "roi": 0.10969467308338218
+        },
+        {
+          "trades": 26,
+          "wins": 14,
+          "win_rate": 0.5384615384615384,
+          "pnl": 2.2534646765528077,
+          "roi": 0.08667171832895414
+        }
+      ],
+      "development_pnl": 9.695129166199331,
+      "development_min_pnl": 0.6064705108600914,
+      "development_roi": 0.06506798098120356
+    },
+    {
+      "seconds": 180,
+      "signal": "prev",
+      "regime": "all",
+      "prev_threshold": 0.0003,
+      "round_threshold": 0,
+      "max_price": 0.5,
+      "development": [
+        {
+          "trades": 30,
+          "wins": 18,
+          "win_rate": 0.6,
+          "pnl": 8.154849071610425,
+          "roi": 0.27182830238701416
+        },
+        {
+          "trades": 92,
+          "wins": 46,
+          "win_rate": 0.5,
+          "pnl": 2.0461237980177502,
+          "roi": 0.02224047606541033
+        },
+        {
+          "trades": 69,
+          "wins": 34,
+          "win_rate": 0.4927536231884058,
+          "pnl": 0.43522254174139063,
+          "roi": 0.006307573068715806
+        },
+        {
+          "trades": 40,
+          "wins": 26,
+          "win_rate": 0.65,
+          "pnl": 12.776782608997163,
+          "roi": 0.3194195652249291
+        }
+      ],
+      "development_pnl": 23.41297802036673,
+      "development_min_pnl": 0.43522254174139063,
+      "development_roi": 0.10135488320505077
+    },
+    {
+      "seconds": 60,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0002,
+      "round_threshold": 0.0001,
+      "max_price": 0.55,
+      "development": [
+        {
+          "trades": 62,
+          "wins": 32,
+          "win_rate": 0.5161290322580645,
+          "pnl": 0.2494991551859742,
+          "roi": 0.004024179922354423
+        },
+        {
+          "trades": 115,
+          "wins": 68,
+          "win_rate": 0.591304347826087,
+          "pnl": 16.77372289516503,
+          "roi": 0.14585845995795677
+        },
+        {
+          "trades": 99,
+          "wins": 55,
+          "win_rate": 0.5555555555555556,
+          "pnl": 8.516448687259398,
+          "roi": 0.0860247342147414
+        },
+        {
+          "trades": 67,
+          "wins": 35,
+          "win_rate": 0.5223880597014925,
+          "pnl": 1.0217235412861652,
+          "roi": 0.01524960509382336
+        }
+      ],
+      "development_pnl": 26.561394278896568,
+      "development_min_pnl": 0.2494991551859742,
+      "development_roi": 0.07743846728541273
+    },
+    {
+      "seconds": 30,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0002,
+      "round_threshold": 0.0001,
+      "max_price": 0.55,
+      "development": [
+        {
+          "trades": 62,
+          "wins": 32,
+          "win_rate": 0.5161290322580645,
+          "pnl": 0.2494991551859742,
+          "roi": 0.004024179922354423
+        },
+        {
+          "trades": 115,
+          "wins": 68,
+          "win_rate": 0.591304347826087,
+          "pnl": 16.77372289516503,
+          "roi": 0.14585845995795677
+        },
+        {
+          "trades": 99,
+          "wins": 55,
+          "win_rate": 0.5555555555555556,
+          "pnl": 8.340243319577151,
+          "roi": 0.08424488201593082
+        },
+        {
+          "trades": 67,
+          "wins": 35,
+          "win_rate": 0.5223880597014925,
+          "pnl": 1.0217235412861652,
+          "roi": 0.01524960509382336
+        }
+      ],
+      "development_pnl": 26.38518891121432,
+      "development_min_pnl": 0.2494991551859742,
+      "development_roi": 0.07692474901228664
+    },
+    {
+      "seconds": 180,
+      "signal": "weighted",
+      "regime": "all",
+      "prev_threshold": 0.0003,
+      "round_threshold": 5e-05,
+      "max_price": 0.5,
+      "development": [
+        {
+          "trades": 32,
+          "wins": 17,
+          "win_rate": 0.53125,
+          "pnl": 4.114647051408404,
+          "roi": 0.12858272035651264
+        },
+        {
+          "trades": 92,
+          "wins": 45,
+          "win_rate": 0.4891304347826087,
+          "pnl": 0.06932926560737385,
+          "roi": 0.000753578973993194
+        },
+        {
+          "trades": 71,
+          "wins": 36,
+          "win_rate": 0.5070422535211268,
+          "pnl": 2.518319575618984,
+          "roi": 0.03546928979745048
+        },
+        {
+          "trades": 41,
+          "wins": 26,
+          "win_rate": 0.6341463414634146,
+          "pnl": 11.766782608997163,
+          "roi": 0.2869946977804186
+        }
+      ],
+      "development_pnl": 18.469078501631927,
+      "development_min_pnl": 0.06932926560737385,
+      "development_roi": 0.07825880721030477
+    },
+    {
+      "seconds": 180,
+      "signal": "weighted",
+      "regime": "all",
+      "prev_threshold": 0.0003,
+      "round_threshold": 0.0001,
+      "max_price": 0.5,
+      "development": [
+        {
+          "trades": 32,
+          "wins": 17,
+          "win_rate": 0.53125,
+          "pnl": 4.114647051408404,
+          "roi": 0.12858272035651264
+        },
+        {
+          "trades": 90,
+          "wins": 44,
+          "win_rate": 0.4888888888888889,
+          "pnl": 0.02747359550428108,
+          "roi": 0.0003052621722697898
+        },
+        {
+          "trades": 69,
+          "wins": 35,
+          "win_rate": 0.5072463768115942,
+          "pnl": 2.518117555416964,
+          "roi": 0.03649445732488354
+        },
+        {
+          "trades": 41,
+          "wins": 26,
+          "win_rate": 0.6341463414634146,
+          "pnl": 11.766782608997163,
+          "roi": 0.2869946977804186
+        }
+      ],
+      "development_pnl": 18.427020811326813,
+      "development_min_pnl": 0.02747359550428108,
+      "development_roi": 0.07942681384192592
+    },
+    {
+      "seconds": 60,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0002,
+      "round_threshold": 0.0001,
+      "max_price": 0.6,
+      "development": [
+        {
+          "trades": 62,
+          "wins": 32,
+          "win_rate": 0.5161290322580645,
+          "pnl": 0.2494991551859742,
+          "roi": 0.004024179922354423
+        },
+        {
+          "trades": 115,
+          "wins": 68,
+          "win_rate": 0.591304347826087,
+          "pnl": 16.77372289516503,
+          "roi": 0.14585845995795677
+        },
+        {
+          "trades": 99,
+          "wins": 55,
+          "win_rate": 0.5555555555555556,
+          "pnl": 8.516448687259398,
+          "roi": 0.0860247342147414
+        },
+        {
+          "trades": 68,
+          "wins": 35,
+          "win_rate": 0.5147058823529411,
+          "pnl": 0.011723541286165151,
+          "roi": 0.00017240501891419339
+        }
+      ],
+      "development_pnl": 25.551394278896566,
+      "development_min_pnl": 0.011723541286165151,
+      "development_roi": 0.07427730895028072
+    },
+    {
+      "seconds": 60,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0002,
+      "round_threshold": 0.0001,
+      "max_price": 0.65,
+      "development": [
+        {
+          "trades": 62,
+          "wins": 32,
+          "win_rate": 0.5161290322580645,
+          "pnl": 0.2494991551859742,
+          "roi": 0.004024179922354423
+        },
+        {
+          "trades": 115,
+          "wins": 68,
+          "win_rate": 0.591304347826087,
+          "pnl": 16.77372289516503,
+          "roi": 0.14585845995795677
+        },
+        {
+          "trades": 99,
+          "wins": 55,
+          "win_rate": 0.5555555555555556,
+          "pnl": 8.516448687259398,
+          "roi": 0.0860247342147414
+        },
+        {
+          "trades": 68,
+          "wins": 35,
+          "win_rate": 0.5147058823529411,
+          "pnl": 0.011723541286165151,
+          "roi": 0.00017240501891419339
+        }
+      ],
+      "development_pnl": 25.551394278896566,
+      "development_min_pnl": 0.011723541286165151,
+      "development_roi": 0.07427730895028072
+    },
+    {
+      "seconds": 60,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0002,
+      "round_threshold": 0.0001,
+      "max_price": 0.7,
+      "development": [
+        {
+          "trades": 62,
+          "wins": 32,
+          "win_rate": 0.5161290322580645,
+          "pnl": 0.2494991551859742,
+          "roi": 0.004024179922354423
+        },
+        {
+          "trades": 115,
+          "wins": 68,
+          "win_rate": 0.591304347826087,
+          "pnl": 16.77372289516503,
+          "roi": 0.14585845995795677
+        },
+        {
+          "trades": 99,
+          "wins": 55,
+          "win_rate": 0.5555555555555556,
+          "pnl": 8.516448687259398,
+          "roi": 0.0860247342147414
+        },
+        {
+          "trades": 68,
+          "wins": 35,
+          "win_rate": 0.5147058823529411,
+          "pnl": 0.011723541286165151,
+          "roi": 0.00017240501891419339
+        }
+      ],
+      "development_pnl": 25.551394278896566,
+      "development_min_pnl": 0.011723541286165151,
+      "development_roi": 0.07427730895028072
+    },
+    {
+      "seconds": 30,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0002,
+      "round_threshold": 0.0001,
+      "max_price": 0.6,
+      "development": [
+        {
+          "trades": 62,
+          "wins": 32,
+          "win_rate": 0.5161290322580645,
+          "pnl": 0.2494991551859742,
+          "roi": 0.004024179922354423
+        },
+        {
+          "trades": 115,
+          "wins": 68,
+          "win_rate": 0.591304347826087,
+          "pnl": 16.77372289516503,
+          "roi": 0.14585845995795677
+        },
+        {
+          "trades": 99,
+          "wins": 55,
+          "win_rate": 0.5555555555555556,
+          "pnl": 8.340243319577151,
+          "roi": 0.08424488201593082
+        },
+        {
+          "trades": 68,
+          "wins": 35,
+          "win_rate": 0.5147058823529411,
+          "pnl": 0.011723541286165151,
+          "roi": 0.00017240501891419339
+        }
+      ],
+      "development_pnl": 25.37518891121432,
+      "development_min_pnl": 0.011723541286165151,
+      "development_roi": 0.07376508404422767
+    },
+    {
+      "seconds": 30,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0002,
+      "round_threshold": 0.0001,
+      "max_price": 0.65,
+      "development": [
+        {
+          "trades": 62,
+          "wins": 32,
+          "win_rate": 0.5161290322580645,
+          "pnl": 0.2494991551859742,
+          "roi": 0.004024179922354423
+        },
+        {
+          "trades": 115,
+          "wins": 68,
+          "win_rate": 0.591304347826087,
+          "pnl": 16.77372289516503,
+          "roi": 0.14585845995795677
+        },
+        {
+          "trades": 99,
+          "wins": 55,
+          "win_rate": 0.5555555555555556,
+          "pnl": 8.340243319577151,
+          "roi": 0.08424488201593082
+        },
+        {
+          "trades": 68,
+          "wins": 35,
+          "win_rate": 0.5147058823529411,
+          "pnl": 0.011723541286165151,
+          "roi": 0.00017240501891419339
+        }
+      ],
+      "development_pnl": 25.37518891121432,
+      "development_min_pnl": 0.011723541286165151,
+      "development_roi": 0.07376508404422767
+    },
+    {
+      "seconds": 30,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0002,
+      "round_threshold": 0.0001,
+      "max_price": 0.7,
+      "development": [
+        {
+          "trades": 62,
+          "wins": 32,
+          "win_rate": 0.5161290322580645,
+          "pnl": 0.2494991551859742,
+          "roi": 0.004024179922354423
+        },
+        {
+          "trades": 115,
+          "wins": 68,
+          "win_rate": 0.591304347826087,
+          "pnl": 16.77372289516503,
+          "roi": 0.14585845995795677
+        },
+        {
+          "trades": 99,
+          "wins": 55,
+          "win_rate": 0.5555555555555556,
+          "pnl": 8.340243319577151,
+          "roi": 0.08424488201593082
+        },
+        {
+          "trades": 68,
+          "wins": 35,
+          "win_rate": 0.5147058823529411,
+          "pnl": 0.011723541286165151,
+          "roi": 0.00017240501891419339
+        }
+      ],
+      "development_pnl": 25.37518891121432,
+      "development_min_pnl": 0.011723541286165151,
+      "development_roi": 0.07376508404422767
+    },
+    {
+      "seconds": 180,
+      "signal": "sum",
+      "regime": "opposite",
+      "prev_threshold": 0.0003,
+      "round_threshold": 5e-05,
+      "max_price": 0.6,
+      "development": [
+        {
+          "trades": 92,
+          "wins": 51,
+          "win_rate": 0.5543478260869565,
+          "pnl": 6.964091044333278,
+          "roi": 0.07569664178623128
+        },
+        {
+          "trades": 183,
+          "wins": 104,
+          "win_rate": 0.5683060109289617,
+          "pnl": 18.28969183073466,
+          "roi": 0.09994367120620033
+        },
+        {
+          "trades": 138,
+          "wins": 71,
+          "win_rate": 0.5144927536231884,
+          "pnl": -0.1257336787379275,
+          "roi": -0.000911113614042953
+        },
+        {
+          "trades": 116,
+          "wins": 64,
+          "win_rate": 0.5517241379310345,
+          "pnl": 7.938633092773868,
+          "roi": 0.06843649217908507
+        }
+      ],
+      "development_pnl": 33.06668228910388,
+      "development_min_pnl": -0.1257336787379275,
+      "development_roi": 0.06250790602855176
+    },
+    {
+      "seconds": 180,
+      "signal": "sum",
+      "regime": "opposite",
+      "prev_threshold": 0.0003,
+      "round_threshold": 5e-05,
+      "max_price": 0.65,
+      "development": [
+        {
+          "trades": 92,
+          "wins": 51,
+          "win_rate": 0.5543478260869565,
+          "pnl": 6.964091044333278,
+          "roi": 0.07569664178623128
+        },
+        {
+          "trades": 183,
+          "wins": 104,
+          "win_rate": 0.5683060109289617,
+          "pnl": 18.28969183073466,
+          "roi": 0.09994367120620033
+        },
+        {
+          "trades": 138,
+          "wins": 71,
+          "win_rate": 0.5144927536231884,
+          "pnl": -0.1257336787379275,
+          "roi": -0.000911113614042953
+        },
+        {
+          "trades": 116,
+          "wins": 64,
+          "win_rate": 0.5517241379310345,
+          "pnl": 7.938633092773868,
+          "roi": 0.06843649217908507
+        }
+      ],
+      "development_pnl": 33.06668228910388,
+      "development_min_pnl": -0.1257336787379275,
+      "development_roi": 0.06250790602855176
+    },
+    {
+      "seconds": 180,
+      "signal": "sum",
+      "regime": "opposite",
+      "prev_threshold": 0.0003,
+      "round_threshold": 5e-05,
+      "max_price": 0.7,
+      "development": [
+        {
+          "trades": 92,
+          "wins": 51,
+          "win_rate": 0.5543478260869565,
+          "pnl": 6.964091044333278,
+          "roi": 0.07569664178623128
+        },
+        {
+          "trades": 183,
+          "wins": 104,
+          "win_rate": 0.5683060109289617,
+          "pnl": 18.28969183073466,
+          "roi": 0.09994367120620033
+        },
+        {
+          "trades": 138,
+          "wins": 71,
+          "win_rate": 0.5144927536231884,
+          "pnl": -0.1257336787379275,
+          "roi": -0.000911113614042953
+        },
+        {
+          "trades": 116,
+          "wins": 64,
+          "win_rate": 0.5517241379310345,
+          "pnl": 7.938633092773868,
+          "roi": 0.06843649217908507
+        }
+      ],
+      "development_pnl": 33.06668228910388,
+      "development_min_pnl": -0.1257336787379275,
+      "development_roi": 0.06250790602855176
+    },
+    {
+      "seconds": 60,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0002,
+      "round_threshold": 5e-05,
+      "max_price": 0.55,
+      "development": [
+        {
+          "trades": 71,
+          "wins": 37,
+          "win_rate": 0.5211267605633803,
+          "pnl": 1.0220388072094289,
+          "roi": 0.01439491277759759
+        },
+        {
+          "trades": 132,
+          "wins": 77,
+          "win_rate": 0.5833333333333334,
+          "pnl": 17.271703285437066,
+          "roi": 0.13084623701088688
+        },
+        {
+          "trades": 118,
+          "wins": 64,
+          "win_rate": 0.5423728813559322,
+          "pnl": 6.696756434037588,
+          "roi": 0.056752173169810065
+        },
+        {
+          "trades": 76,
+          "wins": 39,
+          "win_rate": 0.5131578947368421,
+          "pnl": -0.18593482649236048,
+          "roi": -0.00244651087489948
+        }
+      ],
+      "development_pnl": 24.80456370019172,
+      "development_min_pnl": -0.18593482649236048,
+      "development_roi": 0.06248000932038217
+    },
+    {
+      "seconds": 30,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0002,
+      "round_threshold": 5e-05,
+      "max_price": 0.55,
+      "development": [
+        {
+          "trades": 71,
+          "wins": 37,
+          "win_rate": 0.5211267605633803,
+          "pnl": 1.0220388072094289,
+          "roi": 0.01439491277759759
+        },
+        {
+          "trades": 132,
+          "wins": 77,
+          "win_rate": 0.5833333333333334,
+          "pnl": 17.271703285437066,
+          "roi": 0.13084623701088688
+        },
+        {
+          "trades": 118,
+          "wins": 64,
+          "win_rate": 0.5423728813559322,
+          "pnl": 6.520551066355341,
+          "roi": 0.055258907341994415
+        },
+        {
+          "trades": 76,
+          "wins": 39,
+          "win_rate": 0.5131578947368421,
+          "pnl": -0.18593482649236048,
+          "roi": -0.00244651087489948
+        }
+      ],
+      "development_pnl": 24.628358332509475,
+      "development_min_pnl": -0.18593482649236048,
+      "development_roi": 0.062036167084406735
+    },
+    {
+      "seconds": 240,
+      "signal": "sum",
+      "regime": "opposite",
+      "prev_threshold": 0.0002,
+      "round_threshold": 5e-05,
+      "max_price": 0.5,
+      "development": [
+        {
+          "trades": 27,
+          "wins": 13,
+          "win_rate": 0.48148148148148145,
+          "pnl": -0.44538515924300137,
+          "roi": -0.01649574663862968
+        },
+        {
+          "trades": 48,
+          "wins": 24,
+          "win_rate": 0.5,
+          "pnl": 0.7790369967488324,
+          "roi": 0.016229937432267343
+        },
+        {
+          "trades": 43,
+          "wins": 23,
+          "win_rate": 0.5348837209302325,
+          "pnl": 3.9052153072249585,
+          "roi": 0.09081896063313857
+        },
+        {
+          "trades": 25,
+          "wins": 13,
+          "win_rate": 0.52,
+          "pnl": 1.2432626563507878,
+          "roi": 0.04973050625403151
+        }
+      ],
+      "development_pnl": 5.4821298010815775,
+      "development_min_pnl": -0.44538515924300137,
+      "development_roi": 0.038336572035535504
+    },
+    {
+      "seconds": 240,
+      "signal": "sum",
+      "regime": "opposite",
+      "prev_threshold": 0.0002,
+      "round_threshold": 0.0001,
+      "max_price": 0.5,
+      "development": [
+        {
+          "trades": 27,
+          "wins": 13,
+          "win_rate": 0.48148148148148145,
+          "pnl": -0.44538515924300137,
+          "roi": -0.01649574663862968
+        },
+        {
+          "trades": 46,
+          "wins": 23,
+          "win_rate": 0.5,
+          "pnl": 0.7788349765468123,
+          "roi": 0.016931195142322008
+        },
+        {
+          "trades": 43,
+          "wins": 23,
+          "win_rate": 0.5348837209302325,
+          "pnl": 3.9052153072249585,
+          "roi": 0.09081896063313857
+        },
+        {
+          "trades": 24,
+          "wins": 12,
+          "win_rate": 0.5,
+          "pnl": 0.2330606361487677,
+          "roi": 0.009710859839531988
+        }
+      ],
+      "development_pnl": 4.471725760677537,
+      "development_min_pnl": -0.44538515924300137,
+      "development_roi": 0.03194089829055383
+    },
+    {
+      "seconds": 60,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 5e-05,
+      "max_price": 0.55,
+      "development": [
+        {
+          "trades": 119,
+          "wins": 66,
+          "win_rate": 0.5546218487394958,
+          "pnl": 9.315588561630083,
+          "roi": 0.07828225682042086
+        },
+        {
+          "trades": 206,
+          "wins": 114,
+          "win_rate": 0.5533980582524272,
+          "pnl": 15.319181862719761,
+          "roi": 0.07436496049863961
+        },
+        {
+          "trades": 195,
+          "wins": 100,
+          "win_rate": 0.5128205128205128,
+          "pnl": -0.5017525957187489,
+          "roi": -0.0025730902344551225
+        },
+        {
+          "trades": 167,
+          "wins": 92,
+          "win_rate": 0.5508982035928144,
+          "pnl": 11.662962457604099,
+          "roi": 0.06983809854852754
+        }
+      ],
+      "development_pnl": 35.79598028623519,
+      "development_min_pnl": -0.5017525957187489,
+      "development_roi": 0.05210477479801338
+    },
+    {
+      "seconds": 60,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 5e-05,
+      "max_price": 0.6,
+      "development": [
+        {
+          "trades": 119,
+          "wins": 66,
+          "win_rate": 0.5546218487394958,
+          "pnl": 9.315588561630083,
+          "roi": 0.07828225682042086
+        },
+        {
+          "trades": 206,
+          "wins": 114,
+          "win_rate": 0.5533980582524272,
+          "pnl": 15.319181862719761,
+          "roi": 0.07436496049863961
+        },
+        {
+          "trades": 195,
+          "wins": 100,
+          "win_rate": 0.5128205128205128,
+          "pnl": -0.5017525957187489,
+          "roi": -0.0025730902344551225
+        },
+        {
+          "trades": 168,
+          "wins": 92,
+          "win_rate": 0.5476190476190477,
+          "pnl": 10.652962457604099,
+          "roi": 0.06341049081907202
+        }
+      ],
+      "development_pnl": 34.785980286235194,
+      "development_min_pnl": -0.5017525957187489,
+      "development_roi": 0.050561017857899994
+    },
+    {
+      "seconds": 60,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 5e-05,
+      "max_price": 0.65,
+      "development": [
+        {
+          "trades": 119,
+          "wins": 66,
+          "win_rate": 0.5546218487394958,
+          "pnl": 9.315588561630083,
+          "roi": 0.07828225682042086
+        },
+        {
+          "trades": 206,
+          "wins": 114,
+          "win_rate": 0.5533980582524272,
+          "pnl": 15.319181862719761,
+          "roi": 0.07436496049863961
+        },
+        {
+          "trades": 195,
+          "wins": 100,
+          "win_rate": 0.5128205128205128,
+          "pnl": -0.5017525957187489,
+          "roi": -0.0025730902344551225
+        },
+        {
+          "trades": 168,
+          "wins": 92,
+          "win_rate": 0.5476190476190477,
+          "pnl": 10.652962457604099,
+          "roi": 0.06341049081907202
+        }
+      ],
+      "development_pnl": 34.785980286235194,
+      "development_min_pnl": -0.5017525957187489,
+      "development_roi": 0.050561017857899994
+    },
+    {
+      "seconds": 60,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 5e-05,
+      "max_price": 0.7,
+      "development": [
+        {
+          "trades": 119,
+          "wins": 66,
+          "win_rate": 0.5546218487394958,
+          "pnl": 9.315588561630083,
+          "roi": 0.07828225682042086
+        },
+        {
+          "trades": 206,
+          "wins": 114,
+          "win_rate": 0.5533980582524272,
+          "pnl": 15.319181862719761,
+          "roi": 0.07436496049863961
+        },
+        {
+          "trades": 195,
+          "wins": 100,
+          "win_rate": 0.5128205128205128,
+          "pnl": -0.5017525957187489,
+          "roi": -0.0025730902344551225
+        },
+        {
+          "trades": 168,
+          "wins": 92,
+          "win_rate": 0.5476190476190477,
+          "pnl": 10.652962457604099,
+          "roi": 0.06341049081907202
+        }
+      ],
+      "development_pnl": 34.785980286235194,
+      "development_min_pnl": -0.5017525957187489,
+      "development_roi": 0.050561017857899994
+    },
+    {
+      "seconds": 180,
+      "signal": "prev",
+      "regime": "all",
+      "prev_threshold": 0.0003,
+      "round_threshold": 0.0002,
+      "max_price": 0.5,
+      "development": [
+        {
+          "trades": 28,
+          "wins": 17,
+          "win_rate": 0.6071428571428571,
+          "pnl": 8.154647051408404,
+          "roi": 0.2912373946931573
+        },
+        {
+          "trades": 84,
+          "wins": 42,
+          "win_rate": 0.5,
+          "pnl": 1.9186009296158808,
+          "roi": 0.022840487257331916
+        },
+        {
+          "trades": 64,
+          "wins": 31,
+          "win_rate": 0.484375,
+          "pnl": -0.6170371687657423,
+          "roi": -0.009641205761964724
+        },
+        {
+          "trades": 38,
+          "wins": 25,
+          "win_rate": 0.6578947368421053,
+          "pnl": 12.776580588795143,
+          "roi": 0.33622580496829324
+        }
+      ],
+      "development_pnl": 22.232791401053685,
+      "development_min_pnl": -0.6170371687657423,
+      "development_roi": 0.1038915486030546
+    },
+    {
+      "seconds": 30,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 5e-05,
+      "max_price": 0.55,
+      "development": [
+        {
+          "trades": 119,
+          "wins": 66,
+          "win_rate": 0.5546218487394958,
+          "pnl": 9.315588561630083,
+          "roi": 0.07828225682042086
+        },
+        {
+          "trades": 206,
+          "wins": 114,
+          "win_rate": 0.5533980582524272,
+          "pnl": 15.391770557030622,
+          "roi": 0.07471733280111953
+        },
+        {
+          "trades": 195,
+          "wins": 100,
+          "win_rate": 0.5128205128205128,
+          "pnl": -0.6779579634009958,
+          "roi": -0.003476707504620491
+        },
+        {
+          "trades": 167,
+          "wins": 92,
+          "win_rate": 0.5508982035928144,
+          "pnl": 11.624512010617652,
+          "roi": 0.0696078563510039
+        }
+      ],
+      "development_pnl": 35.65391316587736,
+      "development_min_pnl": -0.6779579634009958,
+      "development_roi": 0.05189798131859878
+    },
+    {
+      "seconds": 30,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 5e-05,
+      "max_price": 0.6,
+      "development": [
+        {
+          "trades": 119,
+          "wins": 66,
+          "win_rate": 0.5546218487394958,
+          "pnl": 9.315588561630083,
+          "roi": 0.07828225682042086
+        },
+        {
+          "trades": 206,
+          "wins": 114,
+          "win_rate": 0.5533980582524272,
+          "pnl": 15.391770557030622,
+          "roi": 0.07471733280111953
+        },
+        {
+          "trades": 195,
+          "wins": 100,
+          "win_rate": 0.5128205128205128,
+          "pnl": -0.6779579634009958,
+          "roi": -0.003476707504620491
+        },
+        {
+          "trades": 168,
+          "wins": 92,
+          "win_rate": 0.5476190476190477,
+          "pnl": 10.614512010617652,
+          "roi": 0.06318161911081936
+        }
+      ],
+      "development_pnl": 34.64391316587736,
+      "development_min_pnl": -0.6779579634009958,
+      "development_roi": 0.050354524950403136
+    },
+    {
+      "seconds": 30,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 5e-05,
+      "max_price": 0.65,
+      "development": [
+        {
+          "trades": 119,
+          "wins": 66,
+          "win_rate": 0.5546218487394958,
+          "pnl": 9.315588561630083,
+          "roi": 0.07828225682042086
+        },
+        {
+          "trades": 206,
+          "wins": 114,
+          "win_rate": 0.5533980582524272,
+          "pnl": 15.391770557030622,
+          "roi": 0.07471733280111953
+        },
+        {
+          "trades": 195,
+          "wins": 100,
+          "win_rate": 0.5128205128205128,
+          "pnl": -0.6779579634009958,
+          "roi": -0.003476707504620491
+        },
+        {
+          "trades": 168,
+          "wins": 92,
+          "win_rate": 0.5476190476190477,
+          "pnl": 10.614512010617652,
+          "roi": 0.06318161911081936
+        }
+      ],
+      "development_pnl": 34.64391316587736,
+      "development_min_pnl": -0.6779579634009958,
+      "development_roi": 0.050354524950403136
+    },
+    {
+      "seconds": 30,
+      "signal": "weighted",
+      "regime": "opposite",
+      "prev_threshold": 0.0001,
+      "round_threshold": 5e-05,
+      "max_price": 0.7,
+      "development": [
+        {
+          "trades": 119,
+          "wins": 66,
+          "win_rate": 0.5546218487394958,
+          "pnl": 9.315588561630083,
+          "roi": 0.07828225682042086
+        },
+        {
+          "trades": 206,
+          "wins": 114,
+          "win_rate": 0.5533980582524272,
+          "pnl": 15.391770557030622,
+          "roi": 0.07471733280111953
+        },
+        {
+          "trades": 195,
+          "wins": 100,
+          "win_rate": 0.5128205128205128,
+          "pnl": -0.6779579634009958,
+          "roi": -0.003476707504620491
+        },
+        {
+          "trades": 168,
+          "wins": 92,
+          "win_rate": 0.5476190476190477,
+          "pnl": 10.614512010617652,
+          "roi": 0.06318161911081936
+        }
+      ],
+      "development_pnl": 34.64391316587736,
+      "development_min_pnl": -0.6779579634009958,
+      "development_roi": 0.050354524950403136
+    }
+  ]
+}
