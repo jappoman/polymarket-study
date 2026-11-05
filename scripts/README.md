@@ -58,3 +58,5 @@ Dopo la chiusura dei mercati, regola un log:
 ```
 
 Il paper-trader non effettua ordini reali e non richiede login.
+Il segnale BTC principale viene dal TWAP Chainlink a 60 secondi trasmesso dal
+feed pubblico RTDS di Polymarket; Binance non viene usato per decidere i trade.

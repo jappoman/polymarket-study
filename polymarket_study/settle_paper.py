@@ -8,12 +8,18 @@ import requests
 
 
 GAMMA = "https://gamma-api.polymarket.com/markets"
+EVENTS = "https://gamma-api.polymarket.com/events"
 
 
 def outcome(slug: str):
     response = requests.get(GAMMA, params={"slug": slug}, timeout=20)
     response.raise_for_status()
     rows = response.json()
+    if not rows:
+        response = requests.get(EVENTS, params={"slug": slug}, timeout=20)
+        response.raise_for_status()
+        events = response.json()
+        rows = [market for event in events for market in event.get("markets", [])]
     if not rows:
         return None
     market = rows[0]
@@ -26,7 +32,13 @@ def outcome(slug: str):
     prices = [float(x) for x in prices]
     if not prices or max(prices) < .999:
         return None
-    return outcomes[prices.index(max(prices))]
+    return {
+        "outcome": outcomes[prices.index(max(prices))],
+        "final_outcome_prices": prices,
+        "resolution_source": market.get("resolutionSource") or "",
+        "closed": market.get("closed"),
+        "end_date": market.get("endDate"),
+    }
 
 
 def main():
@@ -42,8 +54,11 @@ def main():
         slug = row.get("slug")
         if slug and slug not in cache:
             cache[slug] = outcome(slug)
-        final = cache.get(slug)
+        result = cache.get(slug)
+        final = result["outcome"] if result else None
         row["outcome"] = final
+        if result:
+            row.update({key: value for key, value in result.items() if key != "outcome"})
         ask = row.get("ask")
         if row.get("eligible") and final and ask is not None:
             won = row["side"] == final
