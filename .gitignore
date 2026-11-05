@@ -18,3 +18,4 @@ data/analysis_corrected/*/observations_btc.csv
 data/analysis_corrected/*/summary_by_price.csv
 __pycache__/
 polymarket_study/__pycache__/
+*.egg-info/

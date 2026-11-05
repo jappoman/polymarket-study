@@ -103,11 +103,17 @@ def append(path: Path, row: dict) -> None:
 
 async def record(duration: int, output: Path, threshold: float, max_ask: float) -> None:
     deadline = time.time() + duration
+    written = 0
+    last_status = 0.0
     while time.time() < deadline:
         markets = await asyncio.to_thread(get_active_markets)
         if not markets:
+            if time.time() - last_status >= 30:
+                print("[paper] nessun mercato BTC 5m attivo trovato; continuo a controllare", flush=True)
+                last_status = time.time()
             await asyncio.sleep(5)
             continue
+        print(f"[paper] mercati attivi: {len(markets)} | osservazioni salvate: {written}", flush=True)
         token_map = {}
         pending = {}
         now = int(time.time())
@@ -167,11 +173,16 @@ async def record(duration: int, output: Path, threshold: float, max_ask: float) 
                                 "signal_threshold": threshold, "max_ask": max_ask, "ask": ask,
                                 "bid": book.get("best_bid"), "book_ts": book.get("book_ts"), **features,
                             })
+                            written += 1
                         seen.add(key)
+                    if time.time() - last_status >= 30:
+                        print(f"[paper] in esecuzione | mercati: {len(markets)} | righe salvate: {written}", flush=True)
+                        last_status = time.time()
                 await socket.close()
         except Exception as exc:
             append(output, {"recorded_at": datetime.now(timezone.utc).isoformat(),
                             "event": "connection_error", "error": repr(exc)})
+            print(f"[paper] errore connessione: {exc!r}", flush=True)
 
 
 def main() -> None:
