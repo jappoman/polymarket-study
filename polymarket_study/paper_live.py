@@ -21,6 +21,7 @@ GAMMA = "https://gamma-api.polymarket.com/events"
 WS = "wss://ws-subscriptions-clob.polymarket.com/ws/market"
 RTDS = "wss://ws-live-data.polymarket.com"
 OBSERVATIONS = (30, 60, 90, 120, 180, 240, 300)
+MAX_CHAINLINK_LAG = 5.0
 
 
 def get_active_markets() -> list[dict]:
@@ -110,6 +111,11 @@ def chainlink_features(prices: dict, start: int, seconds: int) -> dict | None:
     previous = nearest_chainlink(points, start + seconds - 60)
     if not opening or not current or not previous:
         return None
+    if any(target - point[0] > MAX_CHAINLINK_LAG for target, point in (
+        (start, opening), (start + seconds, current),
+        (start + seconds - 60, previous),
+    )):
+        return None
     return {
         "btc_source": "polymarket_rtds_chainlink_twap_60",
         "chainlink_twap_start": opening[1],
@@ -117,6 +123,7 @@ def chainlink_features(prices: dict, start: int, seconds: int) -> dict | None:
         "chainlink_twap_return_from_start": current[1] / opening[1] - 1.0,
         "chainlink_twap_return_prev_minute": current[1] / previous[1] - 1.0,
         "chainlink_observed_at": current[0],
+        "chainlink_lag_seconds": start + seconds - current[0],
     }
 
 
@@ -131,7 +138,7 @@ async def collect_chainlink(prices: dict, stop: asyncio.Event) -> None:
     }
     while not stop.is_set():
         try:
-            async with websockets.connect(RTDS, close_timeout=5) as socket:
+            async with websockets.connect(RTDS, close_timeout=5, max_queue=None) as socket:
                 await socket.send(json.dumps(subscription))
                 while not stop.is_set():
                     try:
@@ -213,7 +220,7 @@ async def record(duration: int, output: Path, threshold: float, max_ask: float) 
         seen: set[tuple[str, int]] = set()
         assets = list(token_map)
         try:
-            async with websockets.connect(WS, ping_interval=None, close_timeout=5) as socket:
+            async with websockets.connect(WS, ping_interval=None, close_timeout=5, max_queue=None) as socket:
                 await socket.send(json.dumps({"assets_ids": assets, "type": "market", "custom_feature_enabled": True}))
                 end_cycle = min(deadline, time.time() + 75)
                 while time.time() < end_cycle:
