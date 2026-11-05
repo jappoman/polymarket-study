@@ -19,11 +19,26 @@ if (-not $files) {
 }
 
 $count = 0
+$skipped = 0
+$duplicates = 0
+$seen = @{}
 Set-Content -LiteralPath $outputPath -Value $null
 foreach ($file in $files) {
     foreach ($line in Get-Content -LiteralPath $file.FullName) {
         if (-not [string]::IsNullOrWhiteSpace($line)) {
-            Add-Content -LiteralPath $outputPath -Value $line
+            try { $row = $line | ConvertFrom-Json } catch { $skipped++; continue }
+            if (-not $row.slug -or $row.btc_source -ne 'polymarket_rtds_chainlink_twap_60' -or
+                $null -eq $row.chainlink_lag_seconds -or [double]$row.chainlink_lag_seconds -gt 5) {
+                $skipped++
+                continue
+            }
+            $key = "$($row.slug)|$($row.observation_type)|$($row.seconds)|$($row.strategy)"
+            if ($seen.ContainsKey($key)) {
+                $duplicates++
+                continue
+            }
+            $seen[$key] = $true
+            Add-Content -LiteralPath $outputPath -Value ($row | ConvertTo-Json -Compress)
             $count++
         }
     }
@@ -31,4 +46,6 @@ foreach ($file in $files) {
 
 Write-Host "Sessioni unite: $($files.Count)"
 Write-Host "Righe salvate: $count"
+Write-Host "Righe scartate (vecchie/stale/non valide): $skipped"
+Write-Host "Duplicati rimossi: $duplicates"
 Write-Host "Output: $outputPath"

@@ -12,9 +12,16 @@ if ($processes) {
 }
 
 $latest = Get-ChildItem data\paper\live_*.jsonl -ErrorAction SilentlyContinue |
-    Sort-Object LastWriteTime -Descending | Select-Object -First 1
+    Sort-Object Name -Descending | Select-Object -First 1
 if ($latest) {
     Write-Host "Ultimo log: $($latest.FullName)"
     Write-Host "Dimensione: $($latest.Length) byte"
     Get-Content $latest.FullName -Tail 2
+}
+
+$supervisor = Get-ChildItem data\paper\supervisor_*.log -ErrorAction SilentlyContinue |
+    Sort-Object Name -Descending | Select-Object -First 1
+if ($supervisor) {
+    Write-Host "Ultimo supervisore: $($supervisor.FullName)"
+    Get-Content $supervisor.FullName -Tail 3
 }

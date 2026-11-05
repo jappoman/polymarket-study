@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import os
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -22,6 +23,8 @@ WS = "wss://ws-subscriptions-clob.polymarket.com/ws/market"
 RTDS = "wss://ws-live-data.polymarket.com"
 OBSERVATIONS = (30, 60, 90, 120, 180, 240, 300)
 MAX_CHAINLINK_LAG = 5.0
+CHAINLINK_WARMUP_SPAN = 70.0
+CHAINLINK_WARMUP_TIMEOUT = 180.0
 
 
 def get_active_markets() -> list[dict]:
@@ -132,7 +135,7 @@ async def collect_chainlink(prices: dict, stop: asyncio.Event) -> None:
         "action": "subscribe",
         "subscriptions": [{
             "topic": "crypto_prices_twap_sixty",
-            "type": "*",
+            "type": "update",
             "filters": json.dumps({"symbol": "btc/usd"}),
         }],
     }
@@ -183,18 +186,48 @@ def update_book(books: dict, message: dict) -> None:
 
 def append(path: Path, row: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("a") as handle:
+    with path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(row, separators=(",", ":")) + "\n")
+        handle.flush()
+        os.fsync(handle.fileno())
 
 
 async def record(duration: int, output: Path, threshold: float, max_ask: float) -> None:
     deadline = time.time() + duration
     written = 0
     last_status = 0.0
+    last_health = 0.0
     chainlink: dict = {}
+    seen: set[tuple[str, int]] = set()
     chainlink_stop = asyncio.Event()
     chainlink_task = asyncio.create_task(collect_chainlink(chainlink, chainlink_stop))
+    print("[paper] warm-up Chainlink in corso; non salvo osservazioni finché il feed non ha storico sufficiente", flush=True)
+    warmup_deadline = min(deadline, time.time() + CHAINLINK_WARMUP_TIMEOUT)
+    warmup_started = time.time()
+    chainlink_ready = False
+    while time.time() < warmup_deadline:
+        points = chainlink.get("twap60", [])
+        span = points[-1][0] - points[0][0] if len(points) >= 2 else 0.0
+        if span >= CHAINLINK_WARMUP_SPAN:
+            print(f"[paper] Chainlink pronto | storico: {span:.0f}s", flush=True)
+            chainlink_ready = True
+            break
+        await asyncio.sleep(1)
+    if not chainlink_ready:
+        waited = time.time() - warmup_started
+        print(f"[paper] ATTENZIONE: Chainlink non pronto dopo {waited:.0f}s; continuo a ritentare senza salvare dati stantii", flush=True)
     while time.time() < deadline:
+        points = chainlink.get("twap60", [])
+        span = points[-1][0] - points[0][0] if len(points) >= 2 else 0.0
+        if time.time() - last_health >= 60:
+            append(output, {
+                "recorded_at": datetime.now(timezone.utc).isoformat(),
+                "event": "health", "chainlink_ready": span >= CHAINLINK_WARMUP_SPAN,
+                "chainlink_points": len(points), "chainlink_span_seconds": span,
+                "observations_saved": written,
+            })
+            print(f"[paper] health | Chainlink: {span:.0f}s di storico | righe salvate: {written}", flush=True)
+            last_health = time.time()
         markets = await asyncio.to_thread(get_active_markets)
         if not markets:
             if time.time() - last_status >= 30:
@@ -217,7 +250,6 @@ async def record(duration: int, output: Path, threshold: float, max_ask: float) 
                 if target >= now - 2:
                     pending[(market["slug"], seconds)] = target
         books: dict[str, dict] = {}
-        seen: set[tuple[str, int]] = set()
         assets = list(token_map)
         try:
             async with websockets.connect(WS, ping_interval=None, close_timeout=5, max_queue=None) as socket:
