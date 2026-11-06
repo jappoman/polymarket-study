@@ -49,6 +49,14 @@ def main():
     args = parser.parse_args()
     rows = [json.loads(line) for line in args.input.open() if line.strip()]
     cache = {}
+    close_snapshots = {
+        row.get("slug"): row for row in rows
+        if row.get("schema_version") in (3, 4)
+        and row.get("observation_type") == "close_snapshot"
+        and row.get("btc_source") == "polymarket_rtds_chainlink_twap_60"
+        and row.get("chainlink_lag_seconds") is not None
+        and float(row["chainlink_lag_seconds"]) <= 5
+    }
     settled = []
     for row in rows:
         slug = row.get("slug")
@@ -59,6 +67,15 @@ def main():
         row["outcome"] = final
         if result:
             row.update({key: value for key, value in result.items() if key != "outcome"})
+        elif slug in close_snapshots:
+            close = close_snapshots[slug]
+            start_value = float(close["chainlink_twap_start"])
+            final_value = float(close["chainlink_twap_at_observation"])
+            row["outcome"] = "Up" if final_value >= start_value else "Down"
+            row["resolution_source"] = "chainlink_close_snapshot_derived"
+            row["resolution_rule"] = "close_twap >= opening_twap"
+            row["resolution_derived"] = True
+            final = row["outcome"]
         ask = row.get("ask")
         if row.get("eligible") and final and ask is not None:
             won = row["side"] == final

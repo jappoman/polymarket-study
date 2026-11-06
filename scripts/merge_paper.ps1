@@ -27,7 +27,7 @@ foreach ($file in $files) {
     foreach ($line in Get-Content -LiteralPath $file.FullName) {
         if (-not [string]::IsNullOrWhiteSpace($line)) {
             try { $row = $line | ConvertFrom-Json } catch { $skipped++; continue }
-            if (-not $row.slug -or $row.btc_source -ne 'polymarket_rtds_chainlink_twap_60' -or
+            if (($row.schema_version -ne 3 -and $row.schema_version -ne 4) -or -not $row.slug -or $row.btc_source -ne 'polymarket_rtds_chainlink_twap_60' -or
                 $null -eq $row.chainlink_lag_seconds -or [double]$row.chainlink_lag_seconds -gt 5) {
                 $skipped++
                 continue

@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import contextlib
+import copy
 import json
 import os
 import time
@@ -25,6 +27,10 @@ OBSERVATIONS = (30, 60, 90, 120, 180, 240, 300)
 MAX_CHAINLINK_LAG = 5.0
 CHAINLINK_WARMUP_SPAN = 70.0
 CHAINLINK_WARMUP_TIMEOUT = 180.0
+RTDS_REFRESH_SECONDS = 3.0
+SCHEMA_VERSION = 4
+MIN_ASK_SIZE = 1.0
+MAX_SILENCE_SECONDS = 180.0
 
 
 def get_active_markets() -> list[dict]:
@@ -40,10 +46,11 @@ def get_active_markets() -> list[dict]:
             if not slug.startswith("btc-updown-5m-"):
                 continue
             try:
-                end = int(slug.rsplit("-", 1)[1])
+                start = int(slug.rsplit("-", 1)[1])
             except (IndexError, ValueError):
                 continue
-            if now - 5 < end <= now + 600 and market.get("clobTokenIds"):
+            # The numeric suffix is the market start timestamp.
+            if now - 300 < start <= now + 600 and market.get("clobTokenIds"):
                 markets.append(market)
     return sorted({m["slug"]: m for m in markets}.values(), key=lambda m: m["slug"])
 
@@ -119,12 +126,18 @@ def chainlink_features(prices: dict, start: int, seconds: int) -> dict | None:
         (start + seconds - 60, previous),
     )):
         return None
+    window = [value for timestamp, value in points
+              if start <= timestamp <= start + seconds]
+    if not window:
+        return None
     return {
         "btc_source": "polymarket_rtds_chainlink_twap_60",
         "chainlink_twap_start": opening[1],
         "chainlink_twap_at_observation": current[1],
         "chainlink_twap_return_from_start": current[1] / opening[1] - 1.0,
         "chainlink_twap_return_prev_minute": current[1] / previous[1] - 1.0,
+        "chainlink_twap_range_from_start": max(window) / opening[1] - min(window) / opening[1],
+        "chainlink_twap_abs_return_from_start": abs(current[1] / opening[1] - 1.0),
         "chainlink_observed_at": current[0],
         "chainlink_lag_seconds": start + seconds - current[0],
     }
@@ -143,7 +156,13 @@ async def collect_chainlink(prices: dict, stop: asyncio.Event) -> None:
         try:
             async with websockets.connect(RTDS, close_timeout=5, max_queue=None) as socket:
                 await socket.send(json.dumps(subscription))
-                while not stop.is_set():
+                # The legacy public RTDS endpoint currently sends a history
+                # snapshot on subscribe but may not emit subsequent TWAP
+                # updates on the same socket. Reconnect periodically so the
+                # snapshot remains a live, timestamped poll rather than a
+                # silently frozen 59-second window.
+                refresh_deadline = time.monotonic() + RTDS_REFRESH_SECONDS
+                while not stop.is_set() and time.monotonic() < refresh_deadline:
                     try:
                         raw = await asyncio.wait_for(socket.recv(), timeout=5)
                         if isinstance(raw, bytes):
@@ -161,16 +180,27 @@ async def collect_chainlink(prices: dict, stop: asyncio.Event) -> None:
                 await asyncio.sleep(2)
 
 
-def update_book(books: dict, message: dict) -> None:
+def update_book(books: dict, message: dict | list, history: dict | None = None) -> None:
+    if isinstance(message, list):
+        for item in message:
+            update_book(books, item, history)
+        return
+    if not isinstance(message, dict):
+        return
     event = message.get("event_type")
     if event == "book":
         asks = message.get("asks", [])
         bids = message.get("bids", [])
+        best_ask = min(((float(x["price"]), float(x.get("size", 0))) for x in asks), default=(None, None))
+        best_bid = max(((float(x["price"]), float(x.get("size", 0))) for x in bids), default=(None, None))
         books[message["asset_id"]] = {
-            "best_ask": min((float(x["price"]) for x in asks), default=None),
-            "best_bid": max((float(x["price"]) for x in bids), default=None),
+            "best_ask": best_ask[0], "best_ask_size": best_ask[1],
+            "best_bid": best_bid[0], "best_bid_size": best_bid[1],
             "book_ts": message.get("timestamp"),
         }
+        if history is not None:
+            history.setdefault(message["asset_id"], []).append(
+                copy.copy(books[message["asset_id"]]))
     elif event == "price_change":
         for change in message.get("price_changes", message.get("changes", [])):
             asset = change.get("asset_id")
@@ -179,12 +209,36 @@ def update_book(books: dict, message: dict) -> None:
             book = books.setdefault(asset, {})
             if change.get("best_ask") is not None:
                 book["best_ask"] = float(change["best_ask"])
+                if change.get("best_ask_size") is not None:
+                    book["best_ask_size"] = float(change["best_ask_size"])
+                elif change.get("side") == "SELL":
+                    book["best_ask_size"] = float(change.get("size", 0))
             if change.get("best_bid") is not None:
                 book["best_bid"] = float(change["best_bid"])
+                if change.get("best_bid_size") is not None:
+                    book["best_bid_size"] = float(change["best_bid_size"])
+                elif change.get("side") == "BUY":
+                    book["best_bid_size"] = float(change.get("size", 0))
             book["book_ts"] = message.get("timestamp")
+            if history is not None:
+                history.setdefault(asset, []).append(copy.copy(book))
+
+
+def book_at_or_before(history: dict, asset: str, target: float) -> dict:
+    candidates = []
+    for book in history.get(asset, []):
+        raw_ts = book.get("book_ts")
+        try:
+            timestamp = float(raw_ts) / 1000.0 if float(raw_ts) > 10_000_000_000 else float(raw_ts)
+        except (TypeError, ValueError):
+            continue
+        if timestamp <= target:
+            candidates.append((timestamp, book))
+    return max(candidates, key=lambda item: item[0])[1] if candidates else {}
 
 
 def append(path: Path, row: dict) -> None:
+    row.setdefault("schema_version", SCHEMA_VERSION)
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(row, separators=(",", ":")) + "\n")
@@ -195,6 +249,7 @@ def append(path: Path, row: dict) -> None:
 async def record(duration: int, output: Path, threshold: float, max_ask: float) -> None:
     deadline = time.time() + duration
     written = 0
+    last_write = time.time()
     last_status = 0.0
     last_health = 0.0
     chainlink: dict = {}
@@ -217,6 +272,11 @@ async def record(duration: int, output: Path, threshold: float, max_ask: float) 
         waited = time.time() - warmup_started
         print(f"[paper] ATTENZIONE: Chainlink non pronto dopo {waited:.0f}s; continuo a ritentare senza salvare dati stantii", flush=True)
     while time.time() < deadline:
+        if time.time() - last_write > MAX_SILENCE_SECONDS:
+            raise RuntimeError(
+                f"nessun dato scritto da {time.time() - last_write:.0f}s; "
+                "riavvio richiesto dal supervisore"
+            )
         points = chainlink.get("twap60", [])
         span = points[-1][0] - points[0][0] if len(points) >= 2 else 0.0
         if time.time() - last_health >= 60:
@@ -226,6 +286,7 @@ async def record(duration: int, output: Path, threshold: float, max_ask: float) 
                 "chainlink_points": len(points), "chainlink_span_seconds": span,
                 "observations_saved": written,
             })
+            last_write = time.time()
             print(f"[paper] health | Chainlink: {span:.0f}s di storico | righe salvate: {written}", flush=True)
             last_health = time.time()
         markets = await asyncio.to_thread(get_active_markets)
@@ -240,8 +301,8 @@ async def record(duration: int, output: Path, threshold: float, max_ask: float) 
         pending = {}
         now = int(time.time())
         for market in markets:
-            end = int(market["slug"].rsplit("-", 1)[1])
-            start = end - 300
+            start = int(market["slug"].rsplit("-", 1)[1])
+            end = start + 300
             outcomes, tokens = parse_tokens(market)
             for outcome, token in zip(outcomes, tokens):
                 token_map[token] = (market["slug"], outcome, start, end)
@@ -250,29 +311,44 @@ async def record(duration: int, output: Path, threshold: float, max_ask: float) 
                 if target >= now - 2:
                     pending[(market["slug"], seconds)] = target
         books: dict[str, dict] = {}
+        book_history: dict[str, list[dict]] = {}
         assets = list(token_map)
         try:
             async with websockets.connect(WS, ping_interval=None, close_timeout=5, max_queue=None) as socket:
                 await socket.send(json.dumps({"assets_ids": assets, "type": "market", "custom_feature_enabled": True}))
                 end_cycle = min(deadline, time.time() + 75)
+                last_ping = 0.0
+                receive_task = asyncio.create_task(socket.recv())
                 while time.time() < end_cycle:
-                    try:
-                        raw = await asyncio.wait_for(socket.recv(), timeout=1.0)
-                        if raw not in ("PONG", "pong"):
-                            message = json.loads(raw) if isinstance(raw, str) else json.loads(raw.decode())
-                            if isinstance(message, dict):
-                                update_book(books, message)
-                    except asyncio.TimeoutError:
-                        pass
-                    if int(time.time()) % 10 == 0:
+                    done, _ = await asyncio.wait(
+                        {receive_task}, timeout=1.0,
+                    )
+                    if receive_task in done:
+                        try:
+                            raw = receive_task.result()
+                            if raw not in ("PONG", "pong"):
+                                message = json.loads(raw) if isinstance(raw, str) else json.loads(raw.decode())
+                                if isinstance(message, (dict, list)):
+                                    update_book(books, message, book_history)
+                        finally:
+                            receive_task = asyncio.create_task(socket.recv())
+                    if time.time() - last_ping >= 10:
                         await socket.send("PING")
+                        last_ping = time.time()
                     current = time.time()
                     for key, target in pending.items():
-                        if key in seen or current < target or current > target + 3:
+                        # Keep a target pending briefly: RTDS can deliver a
+                        # snapshot several seconds after its newest timestamp.
+                        # The feature function still enforces point <= target
+                        # and the five-second source-lag guard, so this wait
+                        # does not introduce look-ahead.
+                        if key in seen or current < target:
                             continue
                         slug, seconds = key
                         features = chainlink_features(chainlink, target - seconds, seconds)
                         if not features:
+                            if current <= target + 15:
+                                continue
                             seen.add(key)
                             continue
                         prev = features["chainlink_twap_return_prev_minute"]
@@ -286,6 +362,7 @@ async def record(duration: int, output: Path, threshold: float, max_ask: float) 
                                 "signal_threshold": threshold, "max_ask": max_ask,
                                 "ask": None, "bid": None, **features,
                             })
+                            last_write = time.time()
                             written += 1
                             seen.add(key)
                             continue
@@ -297,25 +374,51 @@ async def record(duration: int, output: Path, threshold: float, max_ask: float) 
                             ("opposite_prev", abs(prev) >= threshold and not same, "Up" if prev > 0 else "Down"),
                         ):
                             token = next((t for t, v in token_map.items() if v[0] == slug and v[1] == side), None)
-                            book = books.get(token, {}) if token else {}
+                            book = book_at_or_before(book_history, token, target) if token else {}
+                            up_token = next((t for t, v in token_map.items()
+                                             if v[0] == slug and v[1] == "Up"), None)
+                            down_token = next((t for t, v in token_map.items()
+                                               if v[0] == slug and v[1] == "Down"), None)
+                            up_book = book_at_or_before(book_history, up_token, target) if up_token else {}
+                            down_book = book_at_or_before(book_history, down_token, target) if down_token else {}
                             ask = book.get("best_ask")
+                            ask_size = book.get("best_ask_size")
                             append(output, {
                                 "recorded_at": datetime.now(timezone.utc).isoformat(),
                                 "observation_type": "signal",
                                 "slug": slug, "start_ts": target - seconds, "seconds": seconds,
-                                "strategy": strategy, "side": side, "eligible": eligible and ask is not None and ask <= max_ask,
+                                "strategy": strategy, "side": side,
+                                "eligible": eligible and ask is not None and ask <= max_ask and
+                                ask_size is not None and ask_size >= MIN_ASK_SIZE,
                                 "signal_threshold": threshold, "max_ask": max_ask, "ask": ask,
-                                "bid": book.get("best_bid"), "book_ts": book.get("book_ts"), **features,
+                                "ask_size": ask_size, "bid": book.get("best_bid"),
+                                "bid_size": book.get("best_bid_size"), "book_ts": book.get("book_ts"),
+                                "up_ask": up_book.get("best_ask"),
+                                "up_ask_size": up_book.get("best_ask_size"),
+                                "up_bid": up_book.get("best_bid"),
+                                "up_bid_size": up_book.get("best_bid_size"),
+                                "up_book_ts": up_book.get("book_ts"),
+                                "down_ask": down_book.get("best_ask"),
+                                "down_ask_size": down_book.get("best_ask_size"),
+                                "down_bid": down_book.get("best_bid"),
+                                "down_bid_size": down_book.get("best_bid_size"),
+                                "down_book_ts": down_book.get("book_ts"), **features,
                             })
+                            last_write = time.time()
                             written += 1
                         seen.add(key)
                     if time.time() - last_status >= 30:
                         print(f"[paper] in esecuzione | mercati: {len(markets)} | righe salvate: {written}", flush=True)
                         last_status = time.time()
-                await socket.close()
+                receive_task.cancel()
+                with contextlib.suppress(asyncio.CancelledError, Exception):
+                    await receive_task
+                with contextlib.suppress(asyncio.TimeoutError, Exception):
+                    await asyncio.wait_for(socket.close(), timeout=3)
         except Exception as exc:
             append(output, {"recorded_at": datetime.now(timezone.utc).isoformat(),
                             "event": "connection_error", "error": repr(exc)})
+            last_write = time.time()
             print(f"[paper] errore connessione: {exc!r}", flush=True)
     chainlink_stop.set()
     await chainlink_task

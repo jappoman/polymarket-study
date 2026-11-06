@@ -1,0 +1,62 @@
+{
+  "model": "regularized_logistic_market_level",
+  "features": [
+    "seconds",
+    "btc_return_from_start",
+    "btc_return_prev_minute",
+    "btc_range_from_start",
+    "btc_abs_return_from_start"
+  ],
+  "periods": [
+    "2026-08-14_20",
+    "2026-09-20_26",
+    "2026-09-27_10-03",
+    "2026-10-04_10-10",
+    "2026-10-11_17",
+    "2026-10-18_24",
+    "2026-10-25_11-03"
+  ],
+  "train_periods": 3,
+  "edge_threshold": 0.03,
+  "spread_haircut": 0.05,
+  "fee": 0.01,
+  "evaluation": [
+    {
+      "test_period": "2026-10-04_10-10",
+      "trades": 6,
+      "wins": 2,
+      "pnl": -1.7569346443030656,
+      "roi": -0.2928224407171776,
+      "mean_edge": 0.053805091275360976
+    },
+    {
+      "test_period": "2026-10-11_17",
+      "trades": 3,
+      "wins": 3,
+      "pnl": 3.8665517241379304,
+      "roi": 1.2888505747126435,
+      "mean_edge": 0.05918151961523327
+    },
+    {
+      "test_period": "2026-10-18_24",
+      "trades": 33,
+      "wins": 24,
+      "pnl": 21.10080673947591,
+      "roi": 0.6394183860447246,
+      "mean_edge": 0.05536108947838704
+    },
+    {
+      "test_period": "2026-10-25_11-03",
+      "trades": 2,
+      "wins": 0,
+      "pnl": -2.02,
+      "roi": -1.01,
+      "mean_edge": 0.039414065222658584
+    }
+  ],
+  "evaluation_total": {
+    "trades": 44,
+    "wins": 29,
+    "pnl": 21.190423819310777
+  }
+}
